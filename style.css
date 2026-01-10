@@ -1,0 +1,671 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.bbh-bogle-regular {
+    font-family: "BBH Bogle", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Bungee', cursive;
+}
+
+body,
+h1,
+h2,
+h3,
+li {
+    font-family: 'Roboto', sans-serif;
+}
+
+
+#menu-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+
+    width: 40px;
+    height: 30px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 9999;
+}
+
+#menu-btn span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: white;
+    margin: 6px 0;
+
+    transition:
+        transform 0.4s ease,
+        opacity 0.3s ease;
+}
+
+#menu-btn.open span:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+#menu-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+
+#menu-btn.open span:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+#menu-btn.open span {
+    background: white;
+}
+
+
+
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100vh;
+
+    background: black;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 1s ease;
+
+    z-index: 2500;
+}
+
+#menu-overlay a {
+    color: white;
+    text-decoration: none;
+}
+
+#menu-overlay a:hover {
+    opacity: 0.7;
+}
+
+
+#menu-overlay ul {
+    list-style: none;
+    text-align: center;
+}
+
+#menu-overlay li {
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 0.2em;
+    margin: 20px 0;
+}
+
+#menu-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#banner {
+    position: fixed;
+    /* immer am oberen Bildschirmrand */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    /* Höhe des Banners */
+    background-color: rgba(0, 0, 0, 0.923);
+    /* leicht transparent schwarz */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3500;
+    /* über allem außer Overlay */
+    pointer-events: none;
+    /* lässt Klicks durch */
+    opacity: 0;
+    /* unsichtbar am Anfang */
+    transition: opacity 2s ease;
+}
+
+#banner.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#banner h2 {
+    color: white;
+    font-size: 3rem;
+    letter-spacing: 0.3em;
+    margin: 0;
+}
+
+
+#social-icons {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 4000;
+    /* über Overlay und Button */
+    display: flex;
+    gap: 15px;
+    /* Abstand zwischen den Icons */
+}
+
+#social-icons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 40px;
+    /* gleiche Breite wie Menü-Button */
+    height: 40px;
+    /* gleiche Höhe wie Menü-Button */
+    border-radius: 50%;
+    /* Kreis */
+    background-color: rgba(255, 255, 255, 0.2);
+    /* halbtransparentes Weiß */
+    color: white;
+    /* Icon-Farbe */
+    font-size: 1rem;
+    /* Icon-Größe */
+    text-decoration: none;
+
+    transition: background-color 0.3s, transform 0.2s;
+    cursor: pointer;
+}
+
+#social-icons a:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    /* Hover-Effekt */
+    transform: scale(1.1);
+    /* leichtes Wachsen beim Hover */
+}
+
+
+
+#intro {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(162, 10, 10);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* LOGO-HINTERGRUND */
+.logo-bg {
+    width: 50%;
+    /* feste, kontrollierbare Größe */
+    height: auto;
+
+    background: white;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* LOGO SELBST */
+#logo {
+    width: 100%;
+    /* skaliert IM Kreis */
+    height: auto;
+    display: block;
+    border-radius: 50%;
+}
+
+
+.hero {
+    height: 100vh;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    /* Dunkelheit */
+    opacity: 0;
+    transition: opacity 3s ease;
+    pointer-events: none;
+}
+
+body:not(.page-band) .hero.active::before {
+    opacity: 1;
+}
+
+
+.hero h1 a {
+    color: white;
+    text-decoration: none;
+    font-size: 4rem;
+    letter-spacing: 0.2em;
+}
+
+.hero h1 {
+    color: white;
+    text-decoration: none;
+    font-size: 3rem;
+    letter-spacing: 0.2em;
+    position: relative;
+    z-index: 1;
+    opacity: 0.5;
+    transform: translateY(20px);
+    transition:
+        opacity 3s ease,
+        transform 4s ease;
+}
+
+
+.hero.active h1 {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.band {
+    background-image: url("/Users/janus/Documents/Webprojekte/Tiefenrausch/bandfoto2016m_LE_upscale_gentle_x4.jpg");
+    background-position: top center;
+}
+
+.musik {
+    background-image: url("Tiefenrausch_SO36_12-12-2008_004.jpg");
+}
+
+.konzerte {
+    background-image: url("Tiefenrausch_SO36_12-12-2008_011.jpg");
+}
+
+.gallerie {
+    background-image: url("Tiefenrausch_SO36_12-12-2008_113.jpg");
+}
+
+.shop {
+    /* background-image: url("shop.jpg");*/
+    background-color: beige;
+}
+
+
+
+
+.page-band .band {
+    background-image: url("/Users/janus/Documents/Webprojekte/Tiefenrausch/bandfoto2016m_LE_upscale_gentle_x4.jpg");
+    height: 90vh;
+    background-position: center 10%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.page-band .hero h1 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+
+    font-size: 3rem;
+    /* kannst du anpassen */
+    letter-spacing: 0.2em;
+}
+
+
+.band-intro {
+    display: flex;
+    /* Flexbox aktivieren */
+    flex-direction: row;
+    /* nebeneinander */
+    align-items: center;
+    /* vertikal zentrieren */
+    justify-content: space-between;
+    padding: 5% 10%;
+    gap: 40px;
+    /* Abstand zwischen Text und Bild */
+}
+
+.band-intro-text {
+    flex: 1;
+    /* Text nimmt verfügbaren Platz ein */
+    font-size: 1.3rem;
+    line-height: 1.4;
+}
+
+.band-intro-image {
+    flex: 1;
+    /* Bild nimmt verfügbaren Platz ein */
+}
+
+.band-intro-image img {
+    width: 100%;
+    /* Bild füllt seine Box */
+    height: auto;
+    border-radius: 10px;
+    /* optional abgerundete Ecken */
+    display: block;
+}
+
+/* Responsive: auf kleinen Bildschirmen untereinander */
+@media screen and (max-width: 768px) {
+    .band-intro {
+        flex-direction: column;
+        /* Text über Bild */
+        text-align: center;
+    }
+
+    .band-intro-text,
+    .band-intro-image {
+        flex: unset;
+        width: 100%;
+    }
+
+    .band-intro-image img {
+        max-width: 30%;
+        margin: 20px auto 0 auto;
+    }
+}
+
+.band-details {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5px auto 0 auto;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.band-details p {
+    margin-bottom: 1.5em;
+}
+
+.band-text p:first-child {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .band-text {
+        font-size: 1rem;
+        padding: 4vh 6vw;
+    }
+}
+
+.text-columns {
+    display: flex;
+    gap: 3rem;
+    /* Abstand zwischen den Spalten */
+    margin: 0.5rem 0;
+}
+
+.text-columns p {
+    flex: 1;
+    /* beide gleich breit */
+}
+
+/* Bild + Text nebeneinander, weiter außen */
+.band-image-small {
+    display: flex;
+    align-items: flex-start;
+    gap: 3rem;
+
+    width: 100%;
+    max-width: 1400px;
+    /* weiter außen als normaler Text */
+    margin: 1rem auto;
+    /* Abstand nach oben/unten */
+    padding: 0 3vw;
+    /* wenig Abstand zum Rand */
+    margin: 0.5rem 0;
+
+}
+
+.band-image-small {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    width: 100vw;
+    /* volle Viewport-Breite */
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    padding: 4rem 6vw;
+    /* sehr wenig Rand → horizontaler Look */
+}
+
+/* Bild links */
+.band-image-small img {
+    width: 25%;
+    min-width: 280px;
+    height: auto;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+/* Text rechts */
+.band-image-small p {
+    width: 75%;
+    line-height: 1.9;
+    font-size: 1.1rem;
+    max-width: none;
+    /* WICHTIG: kein künstliches Einengen */
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    .band-image-small {
+        flex-direction: column;
+        padding: 3rem 8vw;
+    }
+
+    .band-image-small img,
+    .band-image-small p {
+        width: 100%;
+    }
+}
+
+.band-image-big {
+    width: 80vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    padding: 2rem 4vw;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+}
+
+.band-image-big img {
+    width: 90vw;
+    max-width: 1400px;
+
+    height: auto;
+    display: block;
+
+    border-radius: 12px;
+    /* optional */
+    margin-bottom: 3rem;
+}
+
+
+.text-columns2 {
+    display: flex;
+    gap: 2.5rem;
+
+    /* näher an den Rand */
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    padding: 2rem 6vw;
+
+    box-sizing: border-box;
+
+}
+
+.text-columns2 p {
+    flex: 1;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+
+
+.band-image-SO36 {
+    width: 80vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+    padding: 2rem 4vw;
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+}
+
+.band-image-SO36 img {
+    width: 90vw;
+    max-width: 1400px;
+
+    height: auto;
+    display: block;
+
+    border-radius: 12px;
+    /* optional */
+    margin-bottom: 6rem;
+}
+
+
+
+
+/* gallerie  */
+
+
+
+.drawings {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin: 60px;
+
+
+
+}
+
+@media (max-width: 1024px) {
+    .drawings {
+        grid-template-columns: repeat(3, 1fr);
+
+    }
+}
+
+@media (max-width: 600px) {
+    .drawings {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+
+
+.items {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 2.5px;
+
+
+}
+
+.items img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    transition: transform 1s ease;
+
+}
+
+.items:hover {
+    transform: scale(1.05);
+}
+
+
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.6s ease;
+    z-index: 1000;
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox img {
+    max-width: 90vw;
+    max-height: 9ovh;
+
+    max-width: 1000px;
+    max-height: 1000px;
+
+    border-radius: 4px;
+
+}
+
+.gallerie-page .gallerie {
+    background-image: url("Tiefenrausch_SO36_12-12-2008_113.jpg");
+    height: 90vh;
+    background-position: center 10%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transform: none;
+    transition: none;
+    opacity: 1;
+
+}
+
+.gallerie-page .hero h1 {
+    opacity: 1;
+    transform: none;
+    transition: none;
+
+    font-size: 3rem;
+    /* kannst du anpassen */
+    letter-spacing: 0.2em;
+
+}
