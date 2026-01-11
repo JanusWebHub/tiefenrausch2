@@ -318,7 +318,7 @@ body:not(.page-band) .hero.active::before {
 
 
 .page-band .band {
-    background-image: url("/Users/janus/Documents/Webprojekte/Tiefenrausch/bandfoto2016m_LE_upscale_gentle_x4.jpg");
+    background-image: url("bandfoto2016m_LE_upscale_gentle_x4.jpg");
     height: 90vh;
     background-position: center 10%;
     background-size: 100%;
